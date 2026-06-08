@@ -1,412 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mane’s 30th Birthday & Amelie’s First Tooth</title>
-    
-    <!-- Elegant Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mane & Amelie Celebration</title>
 
-    <style>
-        /* =========================================
-           STRICT COLOR PALETTE & VARIABLES
-           ========================================= */
-        :root {
-            --baby-pink: #FFD1DC;
-            --light-pink: #FFE4EC;
-            --champagne-silver: #C8C3C6;
-            --champagne-glow: #F7E7CE;
-            --white: #FFFFFF;
-        }
+<style>
+:root {
+  --pink: #FFD1DC;
+  --pink-light: #FFE4EC;
+  --silver: #C8C3C6;
+  --champagne: #F7E7CE;
+  --white: #ffffff;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* PAGE */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, var(--pink), var(--pink-light));
+  color: var(--silver);
+  text-align: center;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+/* HERO */
+.hero {
+  padding: 80px 20px;
+}
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--champagne-silver);
-            background: linear-gradient(135deg, var(--baby-pink) 0%, var(--light-pink) 50%, var(--baby-pink) 100%);
-            background-size: 400% 400%;
-            animation: gradientMove 20s ease infinite;
-            overflow-x: hidden;
-            line-height: 1.8;
-            min-height: 100vh;
-        }
+h1 {
+  font-size: 42px;
+  background: linear-gradient(90deg, #C8C3C6, #F7E7CE, #ffffff, #C8C3C6);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  animation: shine 4s linear infinite;
+}
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+@keyframes shine {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
 
-        /* =========================================
-           TYPOGRAPHY & TEXT EFFECTS
-           ========================================= */
-        h1, h2, h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            line-height: 1.2;
-        }
+/* IMAGE */
+.photo {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #F7E7CE;
+  box-shadow: 0 0 25px rgba(255, 209, 220, 0.6);
+  margin-top: 20px;
+  transition: transform 0.4s ease;
+}
 
-        .animated-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            text-align: center;
-            background: linear-gradient(90deg, var(--champagne-silver), var(--champagne-glow), var(--champagne-silver));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 6s linear infinite, fadeInUp 1.5s ease-out both;
-            margin-bottom: 3rem;
-            padding: 0 1rem;
-        }
+.photo:hover {
+  transform: scale(1.05);
+}
 
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
+/* CARD */
+.card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  display: inline-block;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 20px;
+  border: 1px solid #C8C3C6;
+}
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* =========================================
-           GLASSMORPHISM CARDS
-           ========================================= */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(200, 195, 198, 0.15);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 15px 40px rgba(247, 231, 206, 0.4);
-            border-color: var(--champagne-glow);
-            transform: translateY(-5px);
-        }
-
-        /* =========================================
-           HERO SECTION
-           ========================================= */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .event-card {
-            padding: 3rem 4rem;
-            text-align: center;
-            animation: fadeInUp 1.5s ease-out 0.5s both;
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .event-card .venue {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--champagne-silver);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .event-card .date {
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            color: var(--champagne-silver);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-        }
-
-        .event-card .time {
-            font-size: 1.5rem;
-            color: var(--champagne-silver);
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-        }
-
-        /* =========================================
-           SECTIONS GENERAL
-           ========================================= */
-        section {
-            padding: 6rem 2rem;
-            position: relative;
-            z-index: 10;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .section-content {
-            padding: 4rem 3rem;
-            text-align: center;
-        }
-
-        .section-content h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: var(--champagne-silver);
-            margin-bottom: 1.5rem;
-        }
-
-        .section-content p {
-            font-size: 1.1rem;
-            color: var(--champagne-silver);
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        /* =========================================
-           AMELIE IMAGE STYLING
-           ========================================= */
-        .image-wrapper {
-            position: relative;
-            display: inline-block;
-            margin: 2rem 0;
-        }
-
-        .amelie-portrait {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--white);
-            box-shadow: 0 0 40px var(--champagne-glow), 0 15px 30px rgba(200, 195, 198, 0.3);
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.8s ease;
-            display: block;
-        }
-
-        .amelie-portrait:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 60px var(--champagne-glow), 0 20px 40px rgba(200, 195, 198, 0.4);
-        }
-
-        /* Floating sparkles around image */
-        .sparkle {
-            position: absolute;
-            color: var(--champagne-glow);
-            font-size: 1.5rem;
-            animation: floatSparkle 4s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        .sparkle.s1 { top: 10%; left: 0%; animation-delay: 0s; }
-        .sparkle.s2 { top: 0%; right: 10%; animation-delay: 1.5s; font-size: 1rem; }
-        .sparkle.s3 { bottom: 15%; right: 0%; animation-delay: 3s; }
-
-        @keyframes floatSparkle {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
-            50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
-        }
-
-        /* =========================================
-           FOOTER
-           ========================================= */
-        footer {
-            text-align: center;
-            padding: 5rem 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        footer p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--champagne-silver);
-            position: relative;
-            display: inline-block;
-        }
-
-        footer p::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--champagne-glow), transparent);
-        }
-
-        /* =========================================
-           PARTICLE SYSTEM
-           ========================================= */
-        #particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            opacity: 0;
-            animation: floatUp linear infinite;
-        }
-
-        .particle.heart {
-            color: var(--baby-pink);
-            font-size: 16px;
-        }
-
-        .particle.sparkle {
-            color: var(--champagne-glow);
-            font-size: 12px;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-        }
-
-        /* =========================================
-           SCROLL REVEAL ANIMATION
-           ========================================= */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* =========================================
-           RESPONSIVE DESIGN
-           ========================================= */
-        @media (max-width: 768px) {
-            .event-card {
-                padding: 2.5rem 2rem;
-            }
-            
-            .section-content {
-                padding: 3rem 1.5rem;
-            }
-
-            .amelie-portrait {
-                width: 220px;
-                height: 220px;
-            }
-        }
-    </style>
+/* FOOTER */
+footer {
+  margin-top: 60px;
+  padding: 20px;
+  color: #C8C3C6;
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Floating Particles Container -->
-    <div id="particles-container"></div>
+<div class="hero">
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <h1 class="animated-title">Mane’s 30th Birthday<br>&<br>Amelie’s First Tooth</h1>
-        
-        <div class="event-card glass-card">
-            <p class="venue">Florence Restaurant</p>
-            <p class="date">06.2026</p>
-            <p class="time">19:00</p>
-        </div>
-    </header>
+  <h1>Mane's 30th Birthday & Amelie's First Tooth</h1>
 
-    <!-- Mane's 30th Birthday Section -->
-    <section class="mane-section">
-        <div class="section-content glass-card reveal">
-            <h2>Celebrating 30 Beautiful Years</h2>
-            <p>Three decades of grace, growth, and unforgettable memories. Join us in honoring Mane as she steps into this fabulous new chapter, surrounded by elegance, warmth, and the people who matter most.</p>
-        </div>
-    </section>
+  <!-- 💖 YOUR IMAGE GOES HERE -->
+  <img src="Amelie.jpg" alt="Amelie" class="photo">
 
-    <!-- Amelie's First Tooth Section -->
-    <section class="amelie-section">
-        <div class="section-content glass-card reveal">
-            <h2>Amelie’s Sweet First Milestone</h2>
-            
-            <div class="image-wrapper">
-                <img src="Amelie.jpg" alt="Amelie" class="amelie-portrait">
-                <div class="sparkle s1">✦</div>
-                <div class="sparkle s2">✦</div>
-                <div class="sparkle s3">✦</div>
-            </div>
-            
-            <p>A tiny tooth, a massive celebration. We are overjoyed to celebrate Amelie's first precious milestone with open hearts and sparkling smiles.</p>
-        </div>
-    </section>
+  <div class="card">
+    <h2>Florence Restaurant</h2>
+    <p>20 June 2026 • 19:00</p>
+  </div>
 
-    <!-- Footer -->
-    <footer class="reveal">
-        <p>We look forward to celebrating this beautiful moment with you.</p>
-    </footer>
+</div>
 
-    <!-- JavaScript -->
-    <script>
-        // =========================================
-        // 1. PARTICLE SYSTEM GENERATOR
-        // =========================================
-        function createParticles() {
-            const container = document.getElementById('particles-container');
-            const particleCount = 25; // Kept low for a soft, airy, luxurious feel
-            const types = ['heart', 'sparkle'];
+<footer>
+We look forward to celebrating this beautiful moment with you.
+</footer>
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                const type = types[Math.floor(Math.random() * types.length)];
-                particle.classList.add('particle', type);
-                
-                // Random positioning and slow timing for luxurious feel
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 15 + 15) + 's'; // 15-30 seconds
-                particle.style.animationDelay = (Math.random() * 15) + 's';
-                
-                if (type === 'heart') {
-                    particle.innerHTML = '♡';
-                    particle.style.fontSize = (Math.random() * 12 + 12) + 'px';
-                } else if (type === 'sparkle') {
-                    particle.innerHTML = '✦';
-                    particle.style.fontSize = (Math.random() * 8 + 8) + 'px';
-                }
-                
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
-
-        // =========================================
-        // 2. SCROLL REVEAL ANIMATIONS
-        // =========================================
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add
+</body>
+</html>
