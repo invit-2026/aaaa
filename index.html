@@ -1,102 +1,910 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mane & Amelie Celebration</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join us for an unforgettable evening celebrating Mane's 30th Birthday and Amelie's First Tooth at Florence Restaurant.">
+    <meta name="theme-color" content="#001F54">
+    <title>Mane’s 30th & Amelie’s First Tooth | Luxury Celebration</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-:root {
-  --pink: #FFD1DC;
-  --pink-light: #FFE4EC;
-  --silver: #C8C3C6;
-  --champagne: #F7E7CE;
-  --white: #ffffff;
-}
+    <style>
+        /* =========================================
+           CSS VARIABLES & RESET
+           ========================================= */
+        :root {
+            --navy: #001F54;
+            --navy-dark: #000a1f;
+            --lemon: #FFF44F;
+            --gold: #FFD700;
+            --white: #FFFFFF;
+            --cream: #FFFDF5;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 215, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-/* PAGE */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, var(--pink), var(--pink-light));
-  color: var(--silver);
-  text-align: center;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* HERO */
-.hero {
-  padding: 80px 20px;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-h1 {
-  font-size: 42px;
-  background: linear-gradient(90deg, #C8C3C6, #F7E7CE, #ffffff, #C8C3C6);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  animation: shine 4s linear infinite;
-}
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--navy);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-@keyframes shine {
-  0% { background-position: 0%; }
-  100% { background-position: 200%; }
-}
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
 
-/* IMAGE */
-.photo {
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #F7E7CE;
-  box-shadow: 0 0 25px rgba(255, 209, 220, 0.6);
-  margin-top: 20px;
-  transition: transform 0.4s ease;
-}
+        /* =========================================
+           UTILITY & ANIMATION CLASSES
+           ========================================= */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
 
-.photo:hover {
-  transform: scale(1.05);
-}
+        .text-gold { color: var(--gold); }
+        .text-lemon { color: var(--lemon); }
 
-/* CARD */
-.card {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  display: inline-block;
-  padding: 20px;
-  margin-top: 30px;
-  border-radius: 20px;
-  border: 1px solid #C8C3C6;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
 
-/* FOOTER */
-footer {
-  margin-top: 60px;
-  padding: 20px;
-  color: #C8C3C6;
-}
-</style>
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUpLetter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           SCROLL PROGRESS & MOUSE GLOW
+           ========================================= */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--lemon));
+            width: 0%;
+            z-index: 10000;
+            transition: width 0.1s;
+        }
+
+        #mouse-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+
+        /* =========================================
+           PARTICLE SYSTEM
+           ========================================= */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            opacity: 0.6;
+            animation: floatUp linear infinite;
+        }
+
+        .particle.star { color: var(--gold); font-size: 12px; }
+        .particle.heart { color: var(--lemon); font-size: 16px; }
+        .particle.sparkle { color: var(--white); font-size: 10px; }
+        .particle.balloon { 
+            width: 16px; height: 20px; 
+            background: var(--gold); 
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            position: relative;
+            opacity: 0.4;
+        }
+        .particle.balloon::after {
+            content: ''; position: absolute; bottom: -8px; left: 50%; 
+            width: 1px; height: 8px; background: var(--gold); transform: translateX(-50%);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: radial-gradient(ellipse at center, #002a6e 0%, var(--navy) 50%, var(--navy-dark) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.03), transparent 30%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border-radius: 50px;
+            animation: fadeUp 1s ease-out both;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--white), var(--gold), var(--lemon), var(--white));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeUp 1s ease-out 0.2s both, shimmer 5s linear infinite;
+        }
+
+        .hero h1 .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUpLetter 0.6s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 253, 245, 0.8);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            animation: fadeUp 1s ease-out 0.4s both;
+        }
+
+        .hero-info-card {
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1.5rem 3rem;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 1s ease-out 0.6s both;
+        }
+
+        .hero-info-item {
+            text-align: center;
+        }
+
+        .hero-info-item i {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .hero-info-item span {
+            display: block;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: var(--cream);
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--gold), #e6c200);
+            color: var(--navy);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            animation: fadeUp 1s ease-out 0.8s both, pulse-glow 3s infinite;
+        }
+
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-luxury:hover::before {
+            left: 100%;
+        }
+
+        .btn-luxury:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        /* =========================================
+           COUNTDOWN SECTION
+           ========================================= */
+        .countdown-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .countdown-card {
+            width: 120px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 244, 79, 0.3);
+            animation: pulse-glow 4s infinite;
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--lemon);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            color: var(--cream);
+        }
+
+        /* =========================================
+           CELEBRATION SECTIONS
+           ========================================= */
+        .celebration-section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .celebration-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .celebration-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .celebration-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 253, 245, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .celebration-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .illustration-container {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .illustration-container svg {
+            width: 80%;
+            height: 80%;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element {
+            position: absolute;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(2) { animation-delay: 1s; top: 10%; right: 10%; }
+        .floating-element:nth-child(3) { animation-delay: 2s; bottom: 20%; left: 5%; }
+
+        .celebration-container.reverse {
+            direction: rtl;
+        }
+        .celebration-container.reverse > * {
+            direction: ltr;
+        }
+
+        /* =========================================
+           EVENT DETAILS SECTION
+           ========================================= */
+        .details-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(to bottom, var(--navy), var(--navy-dark));
+            position: relative;
+            z-index: 10;
+        }
+
+        .details-grid {
+            max-width: 1000px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .detail-card {
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .detail-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        .detail-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .detail-card p {
+            color: var(--lemon);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           PHOTO GALLERY
+           ========================================= */
+        .gallery-section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-header .divider {
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            columns: 3;
+            column-gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 31, 84, 0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 10, 31, 0.95);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: var(--gold);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+            color: var(--lemon);
+        }
+
+        /* =========================================
+           RSVP SECTION
+           ========================================= */
+        .rsvp-section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .rsvp-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 253, 245, 0.4);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: var(--lemon);
+        }
+
+        .success-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            background: var(--navy-dark);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .footer-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .footer-divider {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto 2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: rgba(255, 253, 245, 0.5);
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+           ========================================= */
+        @media (max-width: 900px) {
+            .gallery-grid {
+                columns: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .celebration-container,
+            .celebration-container.reverse {
+                grid-template-columns: 1fr;
+                direction: ltr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .countdown-card {
+                width: 80px;
+                height: 100px;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .hero-info-card {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .rsvp-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .gallery-grid {
+                columns: 1;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="hero">
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress"></div>
 
-  <h1>Mane's 30th Birthday & Amelie's First Tooth</h1>
+    <!-- Mouse Follow Glow Effect -->
+    <div id="mouse-glow"></div>
 
-  <!-- 💖 YOUR IMAGE GOES HERE -->
-  <img src="Amelie.jpg" alt="Amelie" class="photo">
+    <!-- Particle Container -->
+    <div id="particles-container"></div>
 
-  <div class="card">
-    <h2>Florence Restaurant</h2>
-    <p>20 June 2026 • 19:00</p>
-  </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">You Are Cordially Invited</div>
+            <h1 class="letter-reveal">Mane’s 30th Birthday<br>&<br>Amelie’s First Tooth</h1>
+            <p class="hero-subtitle">
+                Join us for an unforgettable evening as we celebrate two beautiful milestones surrounded by family, love, and joy.
+            </p>
+            
+            <div class="hero-info-card glass-card">
+                <div class="hero-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Florence Restaurant</span>
+                </div>
+                <div class="hero-info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>June 20, 2026</span>
+                </div>
+                <div class="hero-info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>19:00</span>
+                </div>
+            </div>
 
-</div>
+            <a href="#rsvp" class="btn-luxury">Celebrate With Us</a>
+        </div>
+        <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); width: 200%; height: 200px; background: radial-gradient(ellipse at center, rgba(255,215,0,0.1) 0%, transparent 70%); pointer-events: none;"></div>
+    </section>
 
-<footer>
-We look forward to celebrating this beautiful moment with you.
-</footer>
+    <!-- Countdown Section -->
+    <section class="countdown-section">
+        <div class="reveal">
+            <h2 class="text-gold" style="font-size: 2rem; margin-bottom: 1rem;">The Celebration Begins In</h2>
+            <div class="divider" style="width: 60px; height: 2px; background: var(--gold); margin: 0 auto;"></div>
+        </div>
+        
+        <div class="countdown-grid reveal" id="countdown">
+            <div class="countdown-card glass-card">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-card glass-card">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-card glass-card">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-card glass-card">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+    </section>
 
-</body>
-</html>
+    <!-- Mane's 30th Celebration -->
+    <section class="celebration-section">
+        <div class="celebration-container reveal">
+            <div class="celebration-text">
+                <h2>Celebrating 30 Wonderful Years</h2>
+                <p>Three decades of laughter, growth, and unforgettable memories. Join us in honoring Mane as she steps into this fabulous new chapter with elegance, grace, and the people who matter most.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; @media(min-width: 769px){justify-content: flex-start;}">
+                    <span style="padding: 0.5rem 1rem; border: 1px solid var(--gold); border-radius: 20px; font-size: 0.9rem; color: var(--gold);">Elegant Evening</span>
+                    <span style="padding: 0.5rem 1rem; border: 1px solid var(--gold); border-radius: 20px; font-size: 0.9rem; color: var(--gold);">Gourmet Dining</span>
+                    <span style="padding: 0.5rem 1rem; border: 1px solid var(--gold); border-radius: 20px; font-size: 0.9rem; color: var(--gold);">Live Music</span>
+                </div>
+            </div>
+            <div class="celebration-visual">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="90" fill="rgba(255,215,0,0.05)" stroke="rgba(255,215,0,0.2)" stroke-width="1"/>
+                        <path d="M60 140 L60 110 Q60 100 70 100 L130 100 Q140 100 140 110 L140 140 Q140 150 130 150 L70 150 Q60 150 60 140 Z" fill="#FFFDF5" stroke="#FFD700" stroke-width="2"/>
+                        <path d="M70 100 L70 70 Q70 60 80 60 L120 60 Q130 60 130 70 L130 100" fill="#FFFDF5" stroke="#FFD700" stroke-width="2"/>
+                        <rect x="87" y="40" width="6" height="20" fill="#FFF44F"/>
+                        <rect x="107" y="40" width="6" height="20" fill="#FFF44F"/>
+                        <circle cx="90" cy="35" r="4" fill="#FFD700">
+                            <animate attributeName="r" values="4;5;4" dur="1.5s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="1;0.6;1" dur="1.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="110" cy="35" r="4" fill="#FFD700">
+                            <animate attributeName="r" values="4;5;4" dur="1.5s" repeatCount="indefinite" begin="0.75s"/>
+                            <animate attributeName="opacity" values="1;0.6;1" dur="1.5s" repeatCount="indefinite" begin="0.75s"/>
+                        </circle>
+                        <text x="100" y="130" font-family="Playfair Display" font-size="24" fill="#001F54" text-anchor="middle" font-weight="bold">30</text>
+                    </svg>
+                    <div class="floating-element" style="color: var(--gold); font-size: 2rem;"><i class="fas fa-star"></i></div>
+                    <div class="floating-element" style="color: var(--lemon); font-size: 1.5rem;"><i class="fas fa-glass-cheers"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amelie's First Tooth -->
+    <section class="celebration-section" style="background: rgba(0,0,0,0.1);">
+        <div class="celebration-container reverse reveal">
+            <div class="celebration-text">
+                <h2>Amelie’s First Little Milestone</h2>
+                <p>A tiny tooth, a massive celebration! We are overjoyed to celebrate Amelie's first precious milestone. Surrounded by warmth and wonder, we welcome this sweet moment with open hearts and sparkling smiles.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; @media(min-width: 769px){justify-content: flex-start;}">
+                    <span style="padding: 0.5rem 1rem; border: 1px solid var(--lemon); border-radius: 20px; font-size: 0.9rem; color: var(--lemon);">Sweet Treats</span>
+                    <span style="padding: 0.5rem 1rem; border: 1px solid var(--lemon); border-radius: 20px; font-size: 0.9rem; color: var(--lemon);">Family Joy</span>
+                </div>
+            </div>
+            <div class="celebration-visual">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="90" fill="rgba(255,244,79,0.05)" stroke="rgba(255,244,79,0.2)" stroke-width="1"/>
+                        <path d="M70 60 Q100 40 130 60 Q150 75 140 11
